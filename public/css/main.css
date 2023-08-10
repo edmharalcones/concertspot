@@ -58,6 +58,7 @@ sub,sup{
 }
 
 .card-img-top{
+    margin: 0;
     height: 15rem;
     object-fit: cover;
   }

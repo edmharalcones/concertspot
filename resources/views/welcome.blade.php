@@ -16,7 +16,7 @@
     <body class="antialiased">
 
 <nav class="navbar navbar-expand-lg " x-data="{ open: false }">
-  <div class="container  h-16">
+  <div class="container-fluid  h-16">
       <div class="navbar-brands" >
       <a href="{{ route('dashboard') }}">
                         <x-application-logo/>
@@ -90,7 +90,7 @@
                     <div class="row d-flex gap-6 justify-content-center">
                         <a href="#" >
                     
-                        <div class="col-3 card" style="width: 18rem;">
+                        <div class="col-3 card" style="width: 18rem;padding:0;">
                         <img src="https://images.pexels.com/photos/2240763/pexels-photo-2240763.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
                         <div class="card-body">
                         <h5 class="card-title">Limited tickets available – reserve yours now!</h5>
@@ -100,7 +100,7 @@
                     </div>
                     </div>
 
-                    <div class="col-3 card" style="width: 18rem;">
+                    <div class="col-3 card" style="width: 18rem;padding:0;">
                     <a href="https://www.musicalmum.com/how-early-should-you-get-to-a-concert/"  target="_blank" >
                         <img src="https://images.pexels.com/photos/15555382/pexels-photo-15555382/free-photo-of-traffic-jam-at-night.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -111,7 +111,7 @@
                     </div>
                     </div>
 
-                    <div class="col-3 card" style="width: 18rem;">
+                    <div class="col-3 card" style="width: 18rem;padding:0;">
                     <a href="https://matadornetwork.com/read/best-tips-concert-safety/" target="_blank" >
                         <img src="https://images.pexels.com/photos/4889278/pexels-photo-4889278.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -121,7 +121,7 @@
                     </div>
                     </div>
 
-                    <div class="col-3 card" style="width: 18rem;">
+                    <div class="col-3 card" style="width: 18rem;padding:0;">
                     <a href="https://parokyaniedgar21.wordpress.com/about/" target="_blank"  >
                         <img src="https://sa.kapamilya.com/absnews/abscbnnews/media/2019/life/05/30/20180930-parokya-ni-edgar.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
