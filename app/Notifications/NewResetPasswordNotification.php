@@ -7,16 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MailResetPasswordNotification extends Notification
+class NewResetPasswordNotification extends Notification
 {
     use Queueable;
+
+    public $token;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -32,18 +34,15 @@ class MailResetPasswordNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail( $notifiable ) {
-        $url = url(route('password.reset', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
-
+    public function toMail(object $notifiable): MailMessage
+    {
         return (new MailMessage)
-            ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', $url)
-            ->line('If you did not request a password reset, no further action is required.');
-            
-     }
+                    ->line("It looks like your password for ConcertSpot could use a little tuning up. No worries, though – we've got your backstage pass to reset it!")
+                    ->action('Reset', url('reset-password', $this->token))
+                    ->line("If you didn't request this reset, no worries. Your account remains as safe as a rockstar's secret chord. Simply hit that ignore button and carry on rocking with us.
+                    Thanks for being part of the ConcertSpot family. 🤘 Let's keep the rhythm alive");
+    }
+
     /**
      * Get the array representation of the notification.
      *
