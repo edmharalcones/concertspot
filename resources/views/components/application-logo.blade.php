@@ -1,1 +1,1 @@
-<img src="{{ asset('https://i.postimg.cc/2ygYKwgj/samp-logo.jpg') }}" width="100px" height="auto"></img>
+<img src="https://i.postimg.cc/2ygYKwgj/samp-logo.jpg" width="100px" height="auto"></img>
