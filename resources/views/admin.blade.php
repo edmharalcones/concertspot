@@ -292,7 +292,38 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     {{ __("Create an Event") }}
+                    <br>
                     <form>
+                    <div class="input-group mb-3">
+                   <span class="input-group-text" id="event_name">Event Name</span>
+                   <input type="text" class="form-control" placeholder="Enter event name" aria-label="event_name" aria-describedby="event_name">
+                    </div>
+                    <br>
+                    <div class="input-group mb-3">
+                   <span class="input-group-text" id="event_artists">Event Artists</span>
+                   <input type="text" class="form-control" placeholder="Enter event artists" aria-label="event_artists" aria-describedby="event_artists">
+                    </div>
+                    <br>
+                    <div class="input-group mb-3">
+                   <span class="input-group-text" id="event_ticket_price">Ticket Price</span>
+                   <input type="number" class="form-control" placeholder="Enter ticket price in php " aria-label="event_artists" aria-describedby="event_artists">
+                    </div>
+                    <br>
+                    <form action="">
+                    <label for="birthday">Event Start Date</label>
+                   <input type="date" id="Event start date" name="Event start date">
+                   <input type="submit">
+                    </form>
+                    <form action="">
+                    <label for="birthday">Event End Date &nbsp;</label>
+                   <input type="date" id="Event end date" name="Event end date">
+                   <input type="submit">
+                    </form>
+                    <br>
+                    <label class="form-label" for="event_banner">Upload Event Banner</label>
+                    <input type="file" class="form-control" id="event_banner" />
+                    <br>
+
                     </form>
 
                 </div>
