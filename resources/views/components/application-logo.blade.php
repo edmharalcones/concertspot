@@ -1,1 +1,1 @@
-<img src="https://cdn.pixabay.com/photo/2023/08/13/19/28/19-28-00-205_1280.png" width="100px" height="auto"></img>
+<img src="https://i.postimg.cc/cHpPvCmn/concert-spot-logo-3.png" width="100px" height="auto"></img>

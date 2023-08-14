@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="{{url('/css/main.css')}}">
-        <link rel="icon" href="https://cdn.pixabay.com/photo/2023/08/13/19/28/19-28-00-205_1280.png">
+        <link rel="icon" href="https://i.postimg.cc/cHpPvCmn/concert-spot-logo-3.png">
         <title>ConcertSpot</title>
     </head>
     <body class="antialiased">
