@@ -9,6 +9,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        
+        
         <link rel="stylesheet" href="{{url('/css/main.css')}}">
         <link rel="icon" href="https://i.postimg.cc/cHpPvCmn/concert-spot-logo-3.png">
         <title>ConcertSpot</title>
@@ -62,13 +64,13 @@
                 </div>
                 <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="https://i.postimg.cc/GpsxS7pX/carrousel-1.png" class="d-block w-100 h-50" alt="...">
+                <img src="https://i.postimg.cc/JzXPrx9x/banner-1.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="https://i.postimg.cc/GpsxS7pX/carrousel-1.png" class="d-block w-100" alt="...">
+                <img src="https://i.postimg.cc/gjrHfHVv/banner-2.png" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                <img src="https://i.postimg.cc/GpsxS7pX/carrousel-1.png" class="d-block w-100" alt="...">
+                <img src="https://i.postimg.cc/rF09jgFT/banner-3.png" class="d-block w-100" alt="...">
                 </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -133,6 +135,156 @@
                     </div>
                 </div>
                 </div>
+                    <br>
+                <br>
+                <br>
+                <h2 class="text-gray-500 dark:text-gray-400">Active Events</h2>
+                        <hr>
+
+                    <div class="mt-16 flex justify-content-center">
+                    <div class="row d-flex gap-6 ">
+                       
+                    <div id="slider" class="carousel slide carousel-dark text-center" data-interval="false">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
+                             <span class="carousel-control-next-icon"></span>
+                             </button>
+ 
+        <!-- The slideshow/carousel -->
+                             <div class="carousel-inner">
+          <!-- 1st slide -->
+                            <div class="carousel-item active">
+                                 <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <img class="mb-4"
+                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 1-5 ,2023
+                                              </p>
+                                              <button class="btn btn-success"> Buy Tickets </button>
+                
+                                    </div>
+      
+                                         <div class="col-lg-4 d-lg-block">
+                                             <img class="mb-4"
+                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
+                                            <p class="comment text-gray-500 dark:text-gray-400">
+                                            September 6-10 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+              
+                                        </div>
+      
+                                        <div class="col-lg-4  d-lg-block">
+                                             <img class="mb-4"
+                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 11-15 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+                                        </div>
+                                     </div>
+                                  </div>
+                                </div>
+      
+          <!-- 2nd slide -->
+          <div class="carousel-item ">
+                                 <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <img class="mb-4"
+                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 1-5 ,2023
+                                              </p>
+                                              <button class="btn btn-success"> Buy Tickets </button>
+                
+                                    </div>
+      
+                                         <div class="col-lg-4 d-lg-block">
+                                             <img class="mb-4"
+                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
+                                            <p class="comment text-gray-500 dark:text-gray-400">
+                                            September 6-10 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+              
+                                        </div>
+      
+                                        <div class="col-lg-4  d-lg-block">
+                                             <img class="mb-4"
+                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 11-15 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+                                        </div>
+                                     </div>
+                                  </div>
+                                </div>
+      
+          <!-- 3rd slide -->
+          <div class="carousel-item ">
+                                 <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <img class="mb-4"
+                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 1-5 ,2023
+                                              </p>
+                                              <button class="btn btn-success"> Buy Tickets </button>
+                
+                                    </div>
+      
+                                         <div class="col-lg-4 d-lg-block">
+                                             <img class="mb-4"
+                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
+                                            <p class="comment text-gray-500 dark:text-gray-400">
+                                            September 6-10 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+              
+                                        </div>
+      
+                                        <div class="col-lg-4  d-lg-block">
+                                             <img class="mb-4"
+                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
+                                            style="width: 330px;" />
+                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
+                                             <p class="comment text-gray-500 dark:text-gray-400">
+                                             September 11-15 ,2023
+                                             </p>
+                                             <button class="btn btn-success"> Buy Tickets </button>
+                                        </div>
+                                     </div>
+                                  </div>
+                                </div>
+        </div>
+      </div>
+                </div>
+                </div>
+
+              
 
                 <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
                     <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
