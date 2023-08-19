@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -25,9 +26,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('admin') }}">
+              
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a>
+                    
                 </div>
 
                 <!-- Navigation Links -->
@@ -133,159 +134,68 @@
                     {{ __("Active Events") }}
 
                 </div>
-                <div class="p-6 text-gray-900">
-                    <div id="slider" class="carousel slide carousel-dark text-center" data-interval="false">
-                        <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
-                             <span class="carousel-control-next-icon"></span>
-                             </button>
- 
-        <!-- The slideshow/carousel -->
-                             <div class="carousel-inner">
-          <!-- 1st slide -->
-                            <div class="carousel-item active">
-                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <img class="mb-4"
-                                            src="resources/Anna.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3">Anna</h4>
-                                             <p class="comment">
-        
-                                             "I had an amazing experience adopting a dog from Meowoof. Our new dog is full of 
-                                              love and brings so much happiness to our home."
-                                              </p>
-                
-                                    </div>
-      
-                                         <div class="col-lg-4 d-lg-block">
-                                             <img class="mb-4"
-                                             src="resources/Alex.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Alex</h4>
-                  <p class="comment">
-                
-                    "Felix has fit so wonderfully into our home. He is very sweet and give us lots of 
-                    laugh. Thank you, Meowoof."
-                  </p>
+                <div class="table-responsive">
+              <table class = "table">
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Artists</th>
+                    <th>Ticket price</th>
+                    <th>Banner</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Event Time</th>
+                </thead>
+                <tbody>
+                 <?php
+                 $servername = "localhost";
+                 $username = "root";
+                 $password="";
+                 $database="laravel";
+                 $connection = new mysqli( $servername ,
+                 $username,
+                 $password,
+                 $database);
+
+                if ($connection->connect_error){
+                    die("connection failed: " . $connection->connect_error);
+                }
+
+                $sql = "SELECT * FROM events";
+                $result = $connection->query($sql);
+
+                if (!$result){
+                    die("Invalid query" . $connection->connect_error);
+                }
+
+                while($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                    <td>" . $row["id"] . "</td>
+                    <td>" . $row["event_name"] . "</td>
+                    <td>" . $row["event_artists"] . "</td>
+                    <td>" . $row["ticket_price"] . "</td>
+                    <td> <img src=" . $row["banner_image"] . " width='50' height='50' alt='banner image'/></td>
+                    <td>" . $row["start_date"] . "</td>
+                    <td>" . $row["end_date"] . "</td>
+                    <td>" . $row["event_time"] . "</td>
+                    <td><a class='btn btn-danger btn-sm' href='delete'>Delete</td>
+                    </tr>";
+                    
+                }
+
+              
+                ?>
+                </tbody>
+              </table>
+              </div>
               
                 </div>
-      
-                <div class="col-lg-4  d-lg-block">
-                  <img class="mb-4"
-                  src="resources/Mia.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Mia</h4>
-                  <p class="comment">
-                    "I adopted a cat that we fell in love with from Meowoof. She is a lovely and quiet girl."
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-      
-          <!-- 2nd slide -->
-          <div class="carousel-item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-4">
-                  <img class="mb-4"
-                  src="resources/Kate.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Kate</h4>
-                  <p class="comment">
-                 
-                    "Mango is one of the best things that has ever happened to me. Having a dog 
-                    from Meowoof is pure happiness."
-
-                  </p>
-                </div>
-      
-                <div class="col-lg-4 d-lg-block">
-                  <img class="mb-4"
-                  src="resources/Ben.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Ben</h4>
-                  <p class="comment">
-                 
-                    "Meowoof helped us find a calm and gentle dog that fits perfectly 
-                    into our lifestyle."
-
-                  </p>
-                  
-                </div>
-      
-                <div class="col-lg-4 d-lg-block">
-                  <img class="mb-4"
-                  src="resources/Dan.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Dan</h4>
-                  <p class="comment">
-                   
-                    "Tiger was the first dog we saw and it was love at first sight. 
-                    He is an adorable addition to our family. Thanks, Meowoof."
-                  </p>
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-      
-          <!-- 3rd slide -->
-          <div class="carousel-item">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-4">
-                  <img class="mb-4"
-                  src="resources/Rob.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Rob</h4>
-                  <p class="comment">
-            
-                    "We adopted a senior cat from Meowoof and it was the best decision we 
-                    ever made. She brings so much warmth and comfort to our home."
-                  </p>
-                  
-                </div>
-      
-                <div class="col-lg-4  d-lg-block">
-                  <img class="mb-4"
-                  src="resources/Nina.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Nina</h4>
-                  <p class="comment">
-             
-                    "Thank you, Meowoof, for the wonderful experience adopting Sage. 
-                    She is the sweetest girl."
-                  </p>
-                  
-                </div>
-      
-                <div class="col-lg-4  d-lg-block">
-                  <img class="mb-4"
-                  src="resources/Maddie.png"
-                    style="width: 330px;" />
-                  <h4 class="mb-3">Maddie</h4>
-                  <p class="comment">
-                 
-                    "Batman has brought new joy to our family. Thank you, Meowoof."
-
-                  </p>
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
                 </div>
 
             </div>
-        </div>
-    </div>
+      
+   
         
             <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -293,38 +203,38 @@
                 <div class="p-6 text-gray-900">
                     {{ __("Create an Event") }}
                     <br>
-                    <form>
+                    <form action="{{ route('dashboard.post')  }}" method="POST" enctype="multipart/form-data">
+                    {!! csrf_field() !!}
                     <div class="input-group mb-3">
                    <span class="input-group-text" id="event_name">Event Name</span>
-                   <input type="text" class="form-control" placeholder="Enter event name" aria-label="event_name" aria-describedby="event_name">
+                   <input type="text" class="form-control" placeholder="Enter event name" name="event_name" id="event_name">
                     </div>
                     <br>
                     <div class="input-group mb-3">
-                   <span class="input-group-text" id="event_artists">Event Artists</span>
-                   <input type="text" class="form-control" placeholder="Enter event artists" aria-label="event_artists" aria-describedby="event_artists">
+                    <span class="input-group-text" id="event_artists">Event Artists</span>
+                   <input type="text" class="form-control" placeholder="Enter event artists" name="event_artists" id="event_artists">
                     </div>
+                  
                     <br>
                     <div class="input-group mb-3">
-                   <span class="input-group-text" id="event_ticket_price">Ticket Price</span>
-                   <input type="number" class="form-control" placeholder="Enter ticket price in php " aria-label="event_artists" aria-describedby="event_artists">
-                    </div>
+                    <span class="input-group-text" id="event_ticket_price">Ticket Price</span>
+                   <input type="number" class="form-control" placeholder="Enter ticket price in php " name="ticket_price" id="ticket_price">
+                   </div>
+                    <label class="form-label" for="banner_image">Upload Event Banner</label><br>
+                    <input type="file" class="form-control" id="banner_image" name="banner_image" />
                     <br>
-                    <form action="">
-                    <label for="birthday">Event Start Date</label>
-                   <input type="date" id="Event start date" name="Event start date">
-                   <input type="submit">
-                    </form>
-                    <form action="">
-                    <label for="birthday">Event End Date &nbsp;</label>
-                   <input type="date" id="Event end date" name="Event end date">
-                   <input type="submit">
+                    <label for="start_date">Event Start Date</label>
+                   <input type="date" id="start_date" name="start_date">
+                    <label for="end_date">Event End Date &nbsp;</label>
+                   <input type="date" id="end_date" name="end_date">
+                   <label for="event_time">Event time:&nbsp;</label>
+                  <input type="time" id="event_time" name="event_time">
+                    <br>
+                    <input type="submit" value="Save" clas="btn btn-success">
                     </form>
                     <br>
-                    <label class="form-label" for="event_banner">Upload Event Banner</label>
-                    <input type="file" class="form-control" id="event_banner" />
-                    <br>
-
-                    </form>
+                    
+                    
 
                 </div>
                 <div class="p-6 text-gray-900">

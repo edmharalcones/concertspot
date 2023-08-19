@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('event_name')->unique();
+            $table->string('event_artists',300);
             $table->integer('ticket_price');
-            $table->binary('banner_image');
+            $table->string('banner_image',300);
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->time('event_time');
             $table->timestamps();
         });
     }

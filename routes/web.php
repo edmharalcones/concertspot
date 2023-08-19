@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -24,20 +25,15 @@ Route::get('/tickets', function () {
     return view('tickets');
 })->name('tickets');
 
-Route::get('/admin', function () {
-    return view('admin');
-})->name('admin');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-    Route::get('/admin', 'HomeController@admin')->name('admin');
+    Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
+    Route::get('/admin', [HomeController::class,'admin'])->name('admin');
+    Route::post('/admin', [EventController::class, 'store'])->name('dashboard.post');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home',[HomeController::class,'index']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
