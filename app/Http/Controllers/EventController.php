@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\DB;
 use App\Models\Event;
 
 class EventController extends Controller
@@ -18,6 +19,13 @@ class EventController extends Controller
     {
         $events = Event::all();
         return view('admin')->with('events', $events);
+    }
+
+    public function delete($id)
+    {
+        DB::table('events')->where('id', $id)->delete();
+
+        return redirect()->back()->with('message', 'Event deleted successfully.');
     }
 
     public function store(Request $request)

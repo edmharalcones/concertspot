@@ -21,19 +21,19 @@ Route::get('/team', function () {
     return view('team');
 })->name('team');
 
-Route::get('/tickets', function () {
-    return view('tickets');
-})->name('tickets');
+
+
+Route::get('/delete/{id}', [EventController::class, 'delete'])->name('delete');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
     Route::get('/admin', [HomeController::class,'admin'])->name('admin');
     Route::post('/admin', [EventController::class, 'store'])->name('dashboard.post');
+    Route::get('/tickets', function () {
+        return view('tickets');
+    })->name('tickets');
 });
-
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

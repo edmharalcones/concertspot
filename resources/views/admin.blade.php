@@ -162,25 +162,30 @@
                     die("connection failed: " . $connection->connect_error);
                 }
 
-                $sql = "SELECT * FROM events";
+                $sql = "SELECT *, DATE_FORMAT(event_time, '%h:%i %p') AS formatted_event_time FROM events";
                 $result = $connection->query($sql);
+            
 
                 if (!$result){
                     die("Invalid query" . $connection->connect_error);
                 }
 
                 while($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                    <td>" . $row["id"] . "</td>
-                    <td>" . $row["event_name"] . "</td>
-                    <td>" . $row["event_artists"] . "</td>
-                    <td>" . $row["ticket_price"] . "</td>
-                    <td> <img src=" . $row["banner_image"] . " width='50' height='50' alt='banner image'/></td>
-                    <td>" . $row["start_date"] . "</td>
-                    <td>" . $row["end_date"] . "</td>
-                    <td>" . $row["event_time"] . "</td>
-                    <td><a class='btn btn-danger btn-sm' href='delete'>Delete</td>
-                    </tr>";
+                    echo '<tr>
+                  <td>' . $row["id"] . '</td>
+                  <td>' . $row["event_name"] . '</td>
+                 <td>' . $row["event_artists"] . '</td>
+                <td>' . $row["ticket_price"] . '</td>
+                <td> <img src="' . $row['banner_image'] . '" width="50" height="50" alt="banner image"/></td>
+                <td>' . $row["start_date"] . '</td>
+                <td>' . $row["end_date"] . '</td>
+                <td>' .  $row["formatted_event_time"] . '</td>
+                     <td>
+            <button class="btn btn-danger btn-sm">
+                <a href="' . route('delete', ['id' => $row['id']]) . '" class="text-light">Delete</a>
+            </button>
+        </td>
+    </tr>';
                     
                 }
 

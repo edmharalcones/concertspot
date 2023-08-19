@@ -7,6 +7,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/2a7d893638.js" crossorigin="anonymous"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
         
@@ -90,8 +91,11 @@
 
                     <div class="mt-16 flex ">
                     <div class="row d-flex gap-6 justify-content-center">
-                        <a href="#" >
-                    
+                    @if(auth()->check())
+                        <a href="{{ url('/tickets') }}" >
+                        @else
+                        <a href="{{ url('/login') }}" >
+                    @endif
                         <div class="col-3 card" style="width: 18rem;padding:0;">
                         <img src="https://images.pexels.com/photos/2240763/pexels-photo-2240763.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -142,146 +146,55 @@
                         <hr>
 
                     <div class="mt-16 flex justify-content-center">
-                    <div class="row d-flex gap-6 ">
+                    <div class="row d-flex gap-6 justify-content-center">
                        
-                    <div id="slider" class="carousel slide carousel-dark text-center" data-interval="false">
-                        <button class="carousel-control-prev" type="button" data-bs-target="#slider" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#slider" data-bs-slide="next">
-                             <span class="carousel-control-next-icon"></span>
-                             </button>
- 
-        <!-- The slideshow/carousel -->
-                             <div class="carousel-inner">
-          <!-- 1st slide -->
-                            <div class="carousel-item active">
-                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <img class="mb-4"
-                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 1-5 ,2023
-                                              </p>
-                                              <button class="btn btn-success"> Buy Tickets </button>
                 
-                                    </div>
-      
-                                         <div class="col-lg-4 d-lg-block">
-                                             <img class="mb-4"
-                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
-                                            <p class="comment text-gray-500 dark:text-gray-400">
-                                            September 6-10 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-              
-                                        </div>
-      
-                                        <div class="col-lg-4  d-lg-block">
-                                             <img class="mb-4"
-                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 11-15 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-                                        </div>
-                                     </div>
-                                  </div>
-                                </div>
-      
-          <!-- 2nd slide -->
-          <div class="carousel-item ">
-                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <img class="mb-4"
-                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 1-5 ,2023
-                                              </p>
-                                              <button class="btn btn-success"> Buy Tickets </button>
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "laravel";
+    $connection = new mysqli($servername, $username, $password, $database);
+
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
+    }
+
+    $sql = "SELECT *, DATE_FORMAT(event_time, '%h:%i %p') AS formatted_event_time FROM events";
+    $result = $connection->query($sql);
+
+    if (!$result) {
+        die("Invalid query: " . $connection->connect_error);
+    }
+
+    while ($row = $result->fetch_assoc()) {
+
+        echo '
+        <div class="col-3 card" style="width: 18rem;padding:0;">
+            <img src="' . $row['banner_image'] . '" class="card-img-top" alt="Banner Image">
+            <div class="card-body">
+                <h5 class="card-title">' . $row["event_name"] . '</h5>
+                <p class="card-text">
+                    <strong>Artists:</strong> ' . $row["event_artists"] . '<br>
+                    <strong>Ticket Price:</strong> ' . $row["ticket_price"] . '<br>
+                    <strong>Start Date:</strong> ' . $row["start_date"] . '<br>
+                    <strong>End Date:</strong> ' . $row["end_date"] . '<br>
+                    <strong>Event Time:</strong> ' . $row["formatted_event_time"] . '
+                </p>';
+    
+        if (auth()->check()) {
+            echo '<a href="' . url('/tickets') . '" class="btn btn-success">Book Now!</a>';
+        } else {
+            echo '<a href="' . url('/login') . '" class="btn btn-success">Book Now!</a>';
+        }
+    
+        echo '
+            </div>
+        </div>';
+    }
+    ?>
+</div>
                 
-                                    </div>
-      
-                                         <div class="col-lg-4 d-lg-block">
-                                             <img class="mb-4"
-                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
-                                            <p class="comment text-gray-500 dark:text-gray-400">
-                                            September 6-10 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-              
-                                        </div>
-      
-                                        <div class="col-lg-4  d-lg-block">
-                                             <img class="mb-4"
-                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 11-15 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-                                        </div>
-                                     </div>
-                                  </div>
-                                </div>
-      
-          <!-- 3rd slide -->
-          <div class="carousel-item ">
-                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <img class="mb-4"
-                                            src="https://i.postimg.cc/1zDnJmt0/event-1.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400" >The Stage</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 1-5 ,2023
-                                              </p>
-                                              <button class="btn btn-success"> Buy Tickets </button>
-                
-                                    </div>
-      
-                                         <div class="col-lg-4 d-lg-block">
-                                             <img class="mb-4"
-                                             src="https://i.postimg.cc/1z14gkH8/event-2.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Electro night party</h4>
-                                            <p class="comment text-gray-500 dark:text-gray-400">
-                                            September 6-10 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-              
-                                        </div>
-      
-                                        <div class="col-lg-4  d-lg-block">
-                                             <img class="mb-4"
-                                            src="https://i.postimg.cc/9f1VWKN5/event-3.png"
-                                            style="width: 330px;" />
-                                             <h4 class="mb-3 text-gray-500 dark:text-gray-400">Music Festival</h4>
-                                             <p class="comment text-gray-500 dark:text-gray-400">
-                                             September 11-15 ,2023
-                                             </p>
-                                             <button class="btn btn-success"> Buy Tickets </button>
-                                        </div>
-                                     </div>
-                                  </div>
-                                </div>
-        </div>
-      </div>
-                </div>
                 </div>
 
               
@@ -296,6 +209,21 @@
                                 About the Team
                             </a>
                         </div>
+                    </div>
+                   
+                    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+                    <a href="https://www.facebook.com/login/" target="blank_">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#9ca3af}</style><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                    </a>
+                    </div>
+                    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+                    <a href="https://www.instagram.com/accounts/login/"  target="blank_">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#9ca3af}</style><path d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"/></svg>
+                    </a>
+                    </div>
+                    <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+                    <a href="https://www.youtube.com/account"  target="blank_">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#9ca3af}</style><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
