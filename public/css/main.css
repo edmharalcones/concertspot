@@ -405,6 +405,16 @@ img,video{
     width:1.25rem
 }
 
+.adjust{
+    width: 1000px;
+}
+
+@media (max-width: 640px){
+    .adjust{
+        width: 350px;
+    }
+}
+
 .max-w-7xl{
     max-width:80rem
 }
@@ -714,7 +724,7 @@ img,video{
     .sm\:text-right{
         text-align:right
     }
-
+    
 }@media (min-width: 768px){
     .md\:grid-cols-2{
         grid-template-columns:repeat(2, minmax(0, 1fr))
@@ -727,5 +737,6 @@ img,video{
     .lg\:p-8{
         padding:2rem
     }
+    
 }
 

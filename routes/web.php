@@ -21,6 +21,15 @@ Route::get('/team', function () {
     return view('team');
 })->name('team');
 
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+
 
 
 Route::get('/delete/{id}', [EventController::class, 'delete'])->name('delete');
