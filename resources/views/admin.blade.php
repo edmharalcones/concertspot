@@ -137,64 +137,90 @@
 
                 </div>
                 <div class="table-responsive">
-              <table class = "table">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Artists</th>
-                    <th>Ticket price</th>
-                    <th>Banner</th>
-                    <th>Start date</th>
-                    <th>End date</th>
-                    <th>Event Time</th>
-                </thead>
-                <tbody>
-                 <?php
-                 $servername = "localhost";
-                 $username = "root";
-                 $password="";
-                 $database="laravel";
-                 $connection = new mysqli( $servername ,
-                 $username,
-                 $password,
-                 $database);
+                <table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Artists</th>
+            <th>Ticket Types</th>
+            <th>Ticket Prices</th>
+            <th>Current available</th>
+            <th>Banner</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Event Time</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "laravel";
+        $connection = new mysqli($servername, $username, $password, $database);
 
-                if ($connection->connect_error){
-                    die("connection failed: " . $connection->connect_error);
-                }
+        if ($connection->connect_error) {
+            die("Connection failed: " . $connection->connect_error);
+        }
 
-                $sql = "SELECT *, DATE_FORMAT(event_time, '%h:%i %p') AS formatted_event_time FROM events";
-                $result = $connection->query($sql);
-            
+        $sql = "SELECT *, DATE_FORMAT(event_time, '%h:%i %p') AS formatted_event_time FROM events";
+        $result = $connection->query($sql);
 
-                if (!$result){
-                    die("Invalid query" . $connection->connect_error);
-                }
+        if (!$result) {
+            die("Invalid query: " . $connection->error);
+        }
 
-                while($row = $result->fetch_assoc()) {
-                    echo '<tr>
-                  <td>' . $row["id"] . '</td>
-                  <td>' . $row["event_name"] . '</td>
-                 <td>' . $row["event_artists"] . '</td>
-                <td>' . $row["ticket_price"] . '</td>
-                <td> <img src="' . $row['banner_image'] . '" width="50" height="50" alt="banner image"/></td>
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr>
+                <td>' . $row["id"] . '</td>
+                <td>' . $row["event_name"] . '</td>
+                <td>' . $row["event_artists"] . '</td>
+                <td>
+                    <ul>
+                        <li>VIP</li>
+                        <li>Patron A</li>
+                        <li>Patron B</li>
+                        <li>Upper Box</li>
+                        <li>Lower Box</li>
+                        <li>Gen Ad</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>';
+            // Fetch ticket prices from the 'tickets' table for this event
+            $ticketPricesQuery = "SELECT ticket_price FROM tickets WHERE event_id = " . $row["id"];
+            $ticketPricesResult = $connection->query($ticketPricesQuery);
+            while ($ticketPriceRow = $ticketPricesResult->fetch_assoc()) {
+                echo '<li>' . $ticketPriceRow["ticket_price"] . '</li>';
+            }
+            echo '</ul>
+                </td>
+                <td>
+                    <ul>';
+            // Fetch max ticket numbers from the 'tickets' table for this event
+            $maxTicketNumbersQuery = "SELECT max_tickets FROM tickets WHERE event_id = " . $row["id"];
+            $maxTicketNumbersResult = $connection->query($maxTicketNumbersQuery);
+            while ($maxTicketNumberRow = $maxTicketNumbersResult->fetch_assoc()) {
+                echo '<li>' . $maxTicketNumberRow["max_tickets"] . '</li>';
+            }
+            echo '</ul>
+                </td>
+                <td><img src="' . $row['banner_image'] . '" width="50" height="50" alt="banner image"/></td>
                 <td>' . $row["start_date"] . '</td>
                 <td>' . $row["end_date"] . '</td>
-                <td>' .  $row["formatted_event_time"] . '</td>
-                     <td>
-            <button class="btn btn-danger btn-sm">
-                <a href="' . route('delete', ['id' => $row['id']]) . '" class="text-light">Delete</a>
-            </button>
-        </td>
-    </tr>';
-                    
-                }
-
-              
-                ?>
-                </tbody>
-              </table>
+                <td>' . $row["formatted_event_time"] . '</td>
+                <td>
+                    <button class="btn btn-danger btn-sm">
+                        <a href="' . route('delete', ['id' => $row['id']]) . '" class="text-light">Delete</a>
+                    </button>
+                </td>
+            </tr>';
+        }
+        ?>
+    </tbody>
+</table>
               </div>
               
                 </div>
@@ -222,35 +248,135 @@
                                 </div>
                             @endif
 
-                    <form action="{{ route('dashboard.post')  }}" method="POST" enctype="multipart/form-data">
-                    {!! csrf_field() !!}
-                    <div class="input-group mb-3">
-                   <span class="input-group-text" id="event_name">Event Name</span>
-                   <input type="text" class="form-control" placeholder="Enter event name" name="event_name" id="event_name">
-                    </div>
-                    <br>
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="event_artists">Event Artists</span>
-                   <input type="text" class="form-control" placeholder="Enter event artists" name="event_artists" id="event_artists">
-                    </div>
-                  
-                    <br>
-                    <div class="input-group mb-3">
-                    <span class="input-group-text" id="event_ticket_price">Ticket Price</span>
-                   <input type="number" class="form-control" placeholder="Enter ticket price in php " name="ticket_price" id="ticket_price">
-                   </div>
-                    <label class="form-label" for="banner_image">Upload Event Banner</label><br>
-                    <input type="file" class="form-control" id="banner_image" name="banner_image" />
-                    <br>
-                    <label for="start_date">Event Start Date</label>
-                   <input type="date" id="start_date" name="start_date">
-                    <label for="end_date">Event End Date &nbsp;</label>
-                   <input type="date" id="end_date" name="end_date">
-                   <label for="event_time">Event time:&nbsp;</label>
-                  <input type="time" id="event_time" name="event_time">
-                    <br>
-                    <input type="submit" value="Save" clas="btn btn-success" >
-                    </form>
+                            <form action="{{ route('dashboard.post') }}" method="POST" enctype="multipart/form-data">
+    {!! csrf_field() !!}
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="event_name">Event Name</span>
+        <input type="text" class="form-control" placeholder="Enter event name" name="event_name" id="event_name"required>
+    </div>
+    <br>
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="event_artists">Event Artists</span>
+        <input type="text" class="form-control" placeholder="Enter event artists" name="event_artists" id="event_artists"required>
+    </div>
+    <br>
+
+    <label class="form-label" for="banner_image">Upload Event Banner</label><br>
+    <input type="file" class="form-control" id="banner_image" name="banner_image" />
+    <br>
+    
+    <label for="start_date">Event Start Date</label>
+    <input type="date" id="start_date" min="2010-01-01" name="start_date" required>
+    
+    <label for="end_date">Event End Date &nbsp;</label>
+    <input type="date" id="end_date" min="2010-01-01" name="end_date" required>
+    
+    <label for="event_time">Event time:&nbsp;</label>
+    <input type="time" id="event_time" name="event_time"required>
+    <br>
+    <br>
+    
+    <!-- Ticket Type Selection -->
+    <h2>Ticket Types:</h2>
+    <br>
+    <div class="input-group mb-3">
+        <label for="vip_price">VIP Ticket Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="vip_price" id ="vip_price"class="form-control" required/><br>
+            </div>
+        <label for="vip_max"> &nbsp;  &nbsp;Max Tickets (VIP): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><br>
+        <div class="col-sm-1">
+        <input type="number" name="vip_max" id-="vip_max" class="form-control" required/><br>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="patrona_price">Patron A Ticket Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number"  name="patronA_price" id="patronA_price" class="form-control" required/><br>
+            </div>
+        <label for="patrona_max"> &nbsp;  &nbsp;Max Tickets (Patron A): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="patronA_max" id="patronA_max" class="form-control" required/><br>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="patronb_price">Patron B Ticket Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="patronB_price" id="patronB_price" class="form-control" required/><br>
+            </div>
+        <label for="patronb_max"> &nbsp;  &nbsp;Max Tickets (Patron B): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="patronB_max" id="patronB_max" class="form-control" required/><br>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="lower_price">Lower Box Ticket Price:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number"  name="lower_price" id="lower_price" class="form-control" required/><br>
+            </div>
+        <label for="lower_max"> &nbsp;  &nbsp;Max Tickets (Lower Box): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="lower_max" id="lower_max" class="form-control" required/><br>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="upper_price">Upper Box Ticket Price: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number"  name="upper_price" id="upper_price" class="form-control" required/><br>
+            </div>
+        <label for="upper_max"> &nbsp;  &nbsp;Max Tickets (Upper Box): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="upper_max" id="upper_max" class="form-control" required/><br>
+        </div>
+    </div>
+
+    <div class="input-group mb-3">
+        <label for="genad_price">General Admission Ticket Price: &nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number"  name="genAd_price" id="genAd_price" class="form-control" required/><br>
+            </div>
+        <label for="genad_max"> &nbsp;  &nbsp;Max Tickets (General Admission ): &nbsp;</label>
+        <div class="col-sm-1">
+        <input type="number" name="genAd_max" id="genAd_max" class="form-control" required/><br>
+        </div>
+    </div>
+        
+
+     </div>
+    
+     <script>
+
+const currentDate = new Date();
+        
+        // Format the date in YYYY-MM-DD format (required by date input)
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
+        // Set the minimum attribute of the input to the current date
+        document.getElementById("start_date").min = formattedDate;
+        document.getElementById("end_date").min = formattedDate;
+    // Function to handle form submission
+    function validateAndSubmit() {
+        var startDate = new Date(document.getElementById("start_date").value);
+        var endDate = new Date(document.getElementById("end_date").value);
+        
+        if (endDate < startDate) {
+            alert("End date cannot be earlier than start date. Please correct the dates.");
+            return false; 
+        }
+        
+        return true; 
+    }
+</script>
+    
+    <input type="submit" value="Save" class="btn btn-lg" onclick="return validateAndSubmit();">
+    <br>
+</form>
                     <br>
                     
                     

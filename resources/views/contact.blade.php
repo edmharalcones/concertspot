@@ -33,7 +33,7 @@
                     <div>
                     <h5 class="text-gray-500 dark:text-gray-400">
                         <i class="fa-solid fa-map-location-dot" style="color: #46e1a8;"></i>
-                        123 Anymwhere St., Any City </h5>
+                        General Roxas Ave, Cubao, Quezon City, 1109 Metro Manila </h5>
                     </div>
                     <br>
                     <div>
@@ -56,9 +56,9 @@
                 <div class="form-row">
                 <div class="col">
                 <label for="start_date" class="text-gray-500 dark:text-gray-400">Event Start Date</label>
-                   <input type="date" id="start_date" name="start_date" class="form-control">
+                   <input type="date" id="start_date" min="2010-01-01" name="start_date" class="form-control">
                     <label for="end_date" class="text-gray-500 dark:text-gray-400">Event End Date &nbsp;</label>
-                   <input type="date" id="end_date" name="end_date"  class="form-control">
+                   <input type="date" id="end_date" min="2010-01-01" name="end_date"  class="form-control">
                    </div>
                    <br>
             
@@ -72,6 +72,29 @@
                 <textarea placeholder="Your Message" class="form-control" name="message" rows="10" required></textarea>
                 </div>
                 <br>
+                <script>
+
+const currentDate = new Date();
+        
+        // Format the date in YYYY-MM-DD format (required by date input)
+        const formattedDate = currentDate.toISOString().slice(0, 10);
+
+        // Set the minimum attribute of the input to the current date
+        document.getElementById("start_date").min = formattedDate;
+        document.getElementById("end_date").min = formattedDate;
+    // Function to handle form submission
+    function validateAndSubmit() {
+        var startDate = new Date(document.getElementById("start_date").value);
+        var endDate = new Date(document.getElementById("end_date").value);
+        
+        if (endDate < startDate) {
+            alert("End date cannot be earlier than start date. Please correct the dates.");
+            return false; 
+        }
+        
+        return true; 
+    }
+</script>
                 <button type="submit" class="btn btn-success">Submit Message</button>
                 <input type="hidden" name="_next" value="{{ route('contact') }}">
                 </form>

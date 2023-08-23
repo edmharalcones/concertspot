@@ -176,7 +176,6 @@
                 <h5 class="card-title">' . $row["event_name"] . '</h5>
                 <p class="card-text">
                     <strong>Artists:</strong> ' . $row["event_artists"] . '<br>
-                    <strong>Ticket Price:</strong> ' . $row["ticket_price"] . '<br>
                     <strong>Start Date:</strong> ' . $row["start_date"] . '<br>
                     <strong>End Date:</strong> ' . $row["end_date"] . '<br>
                     <strong>Event Time:</strong> ' . $row["formatted_event_time"] . '
