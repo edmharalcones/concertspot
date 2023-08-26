@@ -76,13 +76,13 @@
 
 const currentDate = new Date();
         
-        // Format the date in YYYY-MM-DD format (required by date input)
+
         const formattedDate = currentDate.toISOString().slice(0, 10);
 
-        // Set the minimum attribute of the input to the current date
+     
         document.getElementById("start_date").min = formattedDate;
         document.getElementById("end_date").min = formattedDate;
-    // Function to handle form submission
+
     function validateAndSubmit() {
         var startDate = new Date(document.getElementById("start_date").value);
         var endDate = new Date(document.getElementById("end_date").value);

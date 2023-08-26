@@ -64,7 +64,7 @@
                 </td>
                 <td>
                     <ul>';
-            // Fetch ticket prices from the 'tickets' table for this event
+         
             $ticketPricesQuery = "SELECT ticket_price FROM tickets WHERE event_id = " . $row["id"];
             $ticketPricesResult = $connection->query($ticketPricesQuery);
             while ($ticketPriceRow = $ticketPricesResult->fetch_assoc()) {
@@ -74,7 +74,7 @@
                 </td>
                 <td>
                     <ul>';
-            // Fetch max ticket numbers from the 'tickets' table for this event
+            
             $maxTicketNumbersQuery = "SELECT max_tickets FROM tickets WHERE event_id = " . $row["id"];
             $maxTicketNumbersResult = $connection->query($maxTicketNumbersQuery);
             while ($maxTicketNumberRow = $maxTicketNumbersResult->fetch_assoc()) {
