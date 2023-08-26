@@ -189,7 +189,7 @@
                 </td>
                 <td>
                     <ul>';
-            // Fetch ticket prices from the 'tickets' table for this event
+    
             $ticketPricesQuery = "SELECT ticket_price FROM tickets WHERE event_id = " . $row["id"];
             $ticketPricesResult = $connection->query($ticketPricesQuery);
             while ($ticketPriceRow = $ticketPricesResult->fetch_assoc()) {
@@ -199,7 +199,7 @@
                 </td>
                 <td>
                     <ul>';
-            // Fetch max ticket numbers from the 'tickets' table for this event
+          
             $maxTicketNumbersQuery = "SELECT max_tickets FROM tickets WHERE event_id = " . $row["id"];
             $maxTicketNumbersResult = $connection->query($maxTicketNumbersQuery);
             while ($maxTicketNumberRow = $maxTicketNumbersResult->fetch_assoc()) {
@@ -278,7 +278,7 @@
     <br>
     <br>
     
-    <!-- Ticket Type Selection -->
+
     <h2>Ticket Types:</h2>
     <br>
     <div class="input-group mb-3">
@@ -354,13 +354,13 @@
 
 const currentDate = new Date();
         
-        // Format the date in YYYY-MM-DD format (required by date input)
+  
         const formattedDate = currentDate.toISOString().slice(0, 10);
 
-        // Set the minimum attribute of the input to the current date
+       
         document.getElementById("start_date").min = formattedDate;
         document.getElementById("end_date").min = formattedDate;
-    // Function to handle form submission
+    
     function validateAndSubmit() {
         var startDate = new Date(document.getElementById("start_date").value);
         var endDate = new Date(document.getElementById("end_date").value);
