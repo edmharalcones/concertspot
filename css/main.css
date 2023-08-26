@@ -401,6 +401,9 @@ img,video{
     width:1.5rem
 }
 
+.w-5{
+    width:1.25rem
+}
 
 .adjust{
     width: 1000px;
@@ -410,11 +413,6 @@ img,video{
     .adjust{
         width: 350px;
     }
-    
-    .banner-page img{
-    display: none;
-}
-
 }
 
 .max-w-7xl{

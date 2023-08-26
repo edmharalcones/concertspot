@@ -1,8 +1,8 @@
 <?php
    $servername = "localhost";
-   $username = "root";
-   $password="";
-   $database="laravel";
+    $username = "u548574294_root";
+    $password = "AAaa!!8520";
+    $database = "u548574294_laravel";
    $connection = new mysqli( $servername ,
    $username,
    $password,

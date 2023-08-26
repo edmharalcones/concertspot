@@ -27,7 +27,7 @@
                     <div>
                         <h5 class="text-gray-500 dark:text-gray-400">
                         <i class="fa-solid fa-envelope" style="color: #46e1a8;"></i>
-                        concertspot_reset@gmail.com</h5>
+                        tempomaestro@concertspot.online</h5>
                     </div>
                     <br>
                     <div>
@@ -51,7 +51,7 @@
                         <hr>
                 <div class="mt-16 flex">                
                 <div class="container-fluid">
-                <form target="_blank" action="https://formsubmit.co/ea8624ae47adc2d294462a2b0cd43a67 " method="POST">
+                <form target="_blank" action="https://formsubmit.co/43d6e570d0ced82d583dba3d2a2fd5f3 " method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                 <div class="form-row">
                 <div class="col">
@@ -91,12 +91,19 @@ const currentDate = new Date();
             alert("End date cannot be earlier than start date. Please correct the dates.");
             return false; 
         }
-        
+       
         return true; 
     }
 </script>
-                <button type="submit" class="btn btn-success">Submit Message</button>
+
+                <button type="submit" class="btn btn-success" onclick="return validateAndSubmit();">Submit Message</button>
                 <input type="hidden" name="_next" value="{{ route('contact') }}">
+                 <input type="hidden" name="_autoresponse" value="Hi Concert Junkie!
+
+Just a quick note to let you know that your message landed safely in our inbox. Like a well-tuned guitar string, we'll be sure to get back to you with some rocking information shortly.
+
+Rock on,
+The ConcertSpot Crew">
                 </form>
                 </div>
                   

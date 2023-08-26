@@ -13,6 +13,8 @@ Auth::routes([
 ]);
 
 
+Route::post('/update-event-id', 'EventController@updateEventId');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,7 +31,9 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-
+Route::get('/booking', function () {
+    return view('booking');
+})->name('booking');
 
 
 Route::get('/delete/{id}', [EventController::class, 'delete'])->name('delete');

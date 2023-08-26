@@ -14,6 +14,13 @@ class EventController extends Controller
     {
         return view('admin');
     }
+    
+     public function updateEventId(Request $request)
+    {
+        $eventId = $request->input('event_id');
+        config(['custom.event_id' => $eventId]);
+        return response()->json(['message' => 'Event ID updated'], 200);
+    }
 
     public function showAdminEventsPage()
     {
@@ -35,7 +42,6 @@ class EventController extends Controller
     public function store(Request $request)
 {
     try {
-   
         $event = Event::create([
             'event_name' => $request->event_name,
             'event_artists' => $request->event_artists,
@@ -52,10 +58,6 @@ class EventController extends Controller
             $storagePath = 'storage/' . $filePath;
             $event->banner_image = $storagePath;
             $event->save();
-      
-            
-
-            
         }
 
         $ticketTypes = [
@@ -63,21 +65,18 @@ class EventController extends Controller
         ];
 
         foreach ($ticketTypes as $type) {
-          
-                $ticket = new Ticket();
-                $ticket->event_id = $event->id; 
-                $ticket->type_name = ucfirst($type);
-                $ticket->ticket_price = $request->input("{$type}_price");
-                $ticket->max_tickets = $request->input("{$type}_max");
-        
-                $ticket->save();
-            } 
-        }catch (\Exception $e) {
-            // Log the exception or display an error message
-            dd("Error saving ticket:", $e->getMessage());
+            $ticket = new Ticket();
+            $ticket->event_id = $event->id; 
+            $ticket->type_name = ucfirst($type);
+            $ticket->ticket_price = $request->input("{$type}_price");
+            $ticket->max_tickets = $request->input("{$type}_max");
+            $ticket->save();
         }
-    
-    return back()->with('flash_message', 'Event created!');
+
+        return back()->with('flash_message', 'Event created!');
+    } catch (\Exception $e) {
+         return back()->withInput()->withErrors(['error' => 'Duplicate event name.']);
+    }
 }
 
 }

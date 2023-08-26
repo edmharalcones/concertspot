@@ -156,9 +156,9 @@
     <tbody>
         <?php
         $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "laravel";
+        $username = "u548574294_root";
+        $password = "AAaa!!8520";
+        $database = "u548574294_laravel";
         $connection = new mysqli($servername, $username, $password, $database);
 
         if ($connection->connect_error) {
@@ -373,8 +373,13 @@ const currentDate = new Date();
         return true; 
     }
 </script>
-    
-    <input type="submit" value="Save" class="btn btn-lg" onclick="return validateAndSubmit();">
+    <div class="container px-4">
+        <div class="flex justify-start mt-4">
+            <x-primary-button onclick="return validateAndSubmit();">
+                {{ __('Save') }}
+            </x-primary-button>
+        </div>
+    </div>
     <br>
 </form>
                     <br>

@@ -101,6 +101,18 @@
       </div>
     </div>
   </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree">
+    How do I go about reserving the venue for an event?
+      </button>
+    </h2>
+    <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      To secure the event venue, just get in touch with us through our email address (tempomaestro@concertspot.online), give us a call at (046) 111-223, or use the 'Book an event' section on our website <a href="https://concertspot.online/public/contact" target="blank_" style="text-decoration: underline;">here</a>.
+      </div>
+    </div>
+  </div>
 
 
 

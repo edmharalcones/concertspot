@@ -14,41 +14,50 @@
         
         <link rel="stylesheet" href="{{url('/css/main.css')}}">
         <link rel="icon" href="https://i.postimg.cc/cHpPvCmn/concert-spot-logo-3.png">
+        <style>
+    @media (max-width: 640px) {
+        .banner-page{
+            display: none;
+        }
+        .navbar{
+            padding-bottom:50px !important;
+            padding-top:30px !important;
+            
+        }
+    }
+</style>
         <title>ConcertSpot</title>
     </head>
     <body class="antialiased">
-
-<nav class="navbar navbar-expand-lg " x-data="{ open: false }">
+<nav class="navbar navbar-expand-lg "  style="padding-bottom:20px;padding-top:20px;">
   <div class="container-fluid  h-16">
       <div class="navbar-brands" >
       <a href="{{ route('dashboard') }}">
                         <x-application-logo/>
                     </a>
         </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown"  style="margin-right: 40px;">
+     
           <ul class="navbar-nav" style="display:flex; justify-content:end;">
           <div class="shrink-0 flex items-center">
                    
                    @if (Route::has('login'))
                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                    @auth
-                       <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                       <a href="{{ url('/dashboard') }}" class="font-semibold dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                    @else
-                       <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+                       <a href="{{ route('login') }}" class="font-semibold dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
 
                        @if (Route::has('register'))
-                           <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                           <a href="{{ route('register') }}" class="ml-4 font-semibold  dark:hover::bg-purple focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
                        @endif
                    @endauth
                </div>
            @endif
           </ul>
       </div>
-  </div>
+  
+</nav>
+
 </nav>
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-center dark:bg-purple-900 selection:bg-red-500 selection:text-white">
             
@@ -57,36 +66,42 @@
                 
 
                 <div class="mt-16">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div class="carousel-inner">
-                <div class="carousel-item active">
-                <img src="https://i.postimg.cc/JzXPrx9x/banner-1.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                <img src="https://i.postimg.cc/gjrHfHVv/banner-2.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                <img src="https://i.postimg.cc/rF09jgFT/banner-3.png" class="d-block w-100" alt="...">
-                </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-                </button>
+                    <div class="row">
+               <div class="jumbotron col">
+                   <br><br><br>
+                     <p class="lead" style="color:white;">Where the excitement begins.</p>
+                            <h1 class="display-4" style="color:white;font-weight:500;">Book your tickets now!</h1>
+                            <br>
+                            <p class="lead">
+                                <ul style="color:white;list-style-type:circle;font-size:1rem;">
+                                    <li>Book with Confidence: Secure, Safe, and Reliable Reservations</li>
+                                    <li>Your Pass to Live Entertainment</li>
+                                </ul>
+                                </p>
+                 <br>           
+  <p class="lead">
+        @if(auth()->check())
+                        <a  class="btn" href="{{ url('/tickets') }}" role="button" style="background-color:white;">Get started
+                        <i class="fa-solid fa-angle-right"></i></a>
+                        @else
+                        <a   class="btn" href="{{ url('/login') }}" role="button" style="background-color:white;">Get started
+                        <i class="fa-solid fa-angle-right"></i></a>
+                    @endif
+                    
+  </p>
+</div>
+<div class="col flex justify-content-end banner-page">
+    <img src="https://i.postimg.cc/g2wctn6V/Untitled-design-3.png" heigh="auto"/>
+</div>
+</div>
                 </div>
                 <br>
                 <br>
                 <br>
-                <h2 class="text-gray-500 dark:text-gray-400">News & Updates</h2>
+                <h2 style="color:white;font-weight:500;">News & Updates</h2>
+                <br>
+                <p style="color:white; font-size:smaller;">Get yourself updated with the latest news!</p>
+                <br>
                         <hr>
 
                     <div class="mt-16 flex ">
@@ -142,8 +157,14 @@
                     <br>
                 <br>
                 <br>
-                <h2 class="text-gray-500 dark:text-gray-400">Active Events</h2>
-                        <hr>
+                <div class="container" style="border-radius: 25px;opacity=0.5;background-color: rgba(254, 175, 229, 0.1);">
+                <div class="p-5">
+                 <h2  style="color:white;font-weight:500;">Active Events</h2>
+                <br>
+                <p style="color:white; font-size:smaller;">What are you waiting for?</p>
+                </div>
+                <br>
+                        
 
                     <div class="mt-16 flex justify-content-center">
                     <div class="row d-flex gap-6 justify-content-center">
@@ -151,9 +172,9 @@
                 
     <?php
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "laravel";
+    $username = "u548574294_root";
+    $password = "AAaa!!8520";
+    $database = "u548574294_laravel";
     $connection = new mysqli($servername, $username, $password, $database);
 
     if ($connection->connect_error) {
@@ -170,74 +191,109 @@
     while ($row = $result->fetch_assoc()) {
 
         echo '
-        <div class="col-3 card" style="width: 18rem;padding:0;">
-            <img src="' . $row['banner_image'] . '" class="card-img-top" alt="Banner Image">
-            <div class="card-body">
-                <h5 class="card-title">' . $row["event_name"] . '</h5>
-                <p class="card-text">
-                    <strong>Artists:</strong> ' . $row["event_artists"] . '<br>
-                    <strong>Start Date:</strong> ' . $row["start_date"] . '<br>
-                    <strong>End Date:</strong> ' . $row["end_date"] . '<br>
-                    <strong>Event Time:</strong> ' . $row["formatted_event_time"] . '
-                </p>';
-    
-        if (auth()->check()) {
-            echo '<a href="' . url('/tickets') . '" class="btn btn-success">Book Now!</a>';
-        } else {
-            echo '<a href="' . url('/login') . '" class="btn btn-success">Book Now!</a>';
-        }
-    
-        echo '
-            </div>
-        </div>';
+<div class="col-3 card mb-5" style="width: 18rem; padding: 0;">
+    <img src="' . $row['banner_image'] . '" class="card-img-top" alt="Banner Image">
+    <div class="card-body">
+        <h5 class="card-title">' . $row["event_name"] . '</h5>
+        <p class="card-text">
+            <strong>Artists:</strong> ' . $row["event_artists"] . '<br>
+            <strong>Start Date:</strong> ' . $row["start_date"] . '<br>
+            <strong>End Date:</strong> ' . $row["end_date"] . '<br>
+            <strong>Event Time:</strong> ' . $row["formatted_event_time"] . '
+        </p>
+        <br>';
+
+if (auth()->check()) {
+    echo '<div class="button-container" style="display: flex; justify-content: center;">
+              <a href="' . url('/tickets') . '" class="btn btn-lg" style="width: 100%;background-color:#feafe5;">Book Now!
+              <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>';
+} else {
+    echo '<div class="button-container" style="display: flex; justify-content: center;">
+              <a href="' . url('/login') . '" class="btn btn-lg" style="width: 100%;background-color:#feafe5;border-radius:0px;">Book Now!
+              <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>';
+}
+
+echo '
+    </div>
+</div>';
+
     }
     ?>
 </div>
                 
                 </div>
-
+</div>
 <br>
 <br>         
-<hr>
+
 <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">   
 
     <div class="flex justify-center mt-5 px-0 sm:items-center sm:justify-between">
         <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
             <div class="flex items-center gap-4">
-                <a href="{{ route('team') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                    About the Team
-                </a>
+                <img src="https://i.postimg.cc/cHpPvCmn/concert-spot-logo-3.png" width="30px" height="auto"/>ConcertSpot.online
+            </div>
+            <div class="flex items-center gap-4">
+            <p style="text-align: justify;">
+                Our goal is to provide you with a seamless and convenient platform<br>
+                to centralize all your concert ticketing needs. From discovering upcoming events <br>
+                to purchasing tickets our site is your one-stop destination for managing <br>
+                your concert experiences . Join us in simplifying and enhancing your concert journey!
+            </p>
             </div>
         </div>
                    
         <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
             <div class="flex items-center gap-4">
-                <a href="{{ route('faq') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                    FAQs
+                <a href="{{ route('login') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    Login
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="{{ route('register') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    Register
+                </a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="{{ url('/tickets') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    Buy Tickets
                 </a>
             </div>
         </div>
         <div class="ml-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-right sm:ml-0">
+            
+            <div class="flex items-center gap-4">
+                <a href="{{ route('faq') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    FAQs
+                </a>
+            </div>
             <div class="flex items-center gap-4">
                 <a href="{{ route('contact') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
                     Contact us
                 </a>
             </div>
+            <div class="flex items-center gap-4">
+                 <a href="{{ route('team') }}" class="group inline-flex items-center hover:text-gray-700 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    About the Team
+                </a>
+            </div>
         </div>
     </div>
-
-
-    <div class="flex justify-center mt-5 px-0 sm:items-center sm:justify-between">
+<br>
+<hr>
+    <div class="flex justify-center mt-1 px-0 sm:items-center sm:justify-between">
         <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-left">
             <div class="flex items-center gap-2">
             <a href="https://www.facebook.com/login/" target="blank_">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 320 512" ><style>svg{fill:#9ca3af}</style><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
+                   <i class="fa-brands fa-square-facebook fa-lg" style="color:#9ca3af;"></i>
                     </a>
                     <a href="https://www.instagram.com/accounts/login/"  target="blank_" >
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512" ><style>svg{fill:#9ca3af}</style><path d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"/></svg>
+                   <i class="fa-brands fa-square-instagram fa-lg" style="color:#9ca3af;"></i>
                     </a>
                     <a href="https://www.youtube.com/account"  target="blank_">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512" ><style>svg{fill:#9ca3af}</style><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+                    <i class="fa-brands fa-square-youtube fa-lg" style="color:#9ca3af;"></i>
                     </a>
                     
             </div>
